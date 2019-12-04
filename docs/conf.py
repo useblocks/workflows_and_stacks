@@ -74,16 +74,16 @@ needs_extra_links = [
    },
    {  # Action --> Tool
       "option": "tools",
-      "incoming": "has actions",
-      "outgoing": "belongs to",
+      "incoming": "actions",
+      "outgoing": "tools",
       "copy": False
    },
    {  # Workflow --> Action
       "option": "actions",
-      "incoming": "has actions",
-      "outgoing": "used by",
+      "incoming": "workflows",
+      "outgoing": "actions",
       "copy": False
-   },
+   }
 ]
 
 needs_extra_options = {
@@ -97,4 +97,11 @@ needs_extra_options = {
     "github_stars": directives.unchanged,
     "last_commit": directives.unchanged,
     "current_version": directives.unchanged,
+}
+
+needs_global_options = {
+    'category': ('[[copy("section_name", lower=True)]]', 'type=="action"'),
+    'actions': ('[[links_from_content(filter="type==\'action\'")]]', 'type=="workflow"'),
+    'tools':  [('[[links_from_content(filter="type==\'tool\'")]]', 'type=="workflow"'),
+               ('[[copy(\'id\', filter=\'current_need["sections"][-1]==sections[-1]\')]]', 'type=="action"')]
 }

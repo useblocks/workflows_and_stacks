@@ -2,6 +2,7 @@ Test results in Sphinx
 ======================
 
 .. workflow:: [[copy('section_name')]]
+   :id: TESTS2SPHINX
 
    Goal
    ----
